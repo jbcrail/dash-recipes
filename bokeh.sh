@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 SRC=https://github.com/bokeh/bokeh
 NAME=`basename ${SRC}`
 ENV=${NAME}-`cat /dev/urandom | base64 | head -c 4`
