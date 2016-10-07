@@ -4,7 +4,7 @@ SRC=https://github.com/bokeh/bokeh
 NAME=`basename ${SRC}`
 ENV=${NAME}-`cat /dev/urandom | base64 | head -c 4`
 DOCSET=Bokeh
-VERSION=0.12.2
+VERSION=0.12.3
 
 REPO_DIR=`pwd`/repos/${NAME}
 DOCSET_DIR=`pwd`/docsets/${NAME}
