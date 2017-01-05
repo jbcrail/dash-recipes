@@ -4,7 +4,7 @@ SRC=https://github.com/dask/dask
 NAME=`basename ${SRC}`
 ENV=${NAME}-`cat /dev/urandom | base64 | head -c 4`
 DOCSET=Dask
-VERSION=0.12.0
+VERSION=0.13.0
 
 REPO_DIR=`pwd`/repos/${NAME}
 DOCSET_DIR=`pwd`/docsets/${NAME}
@@ -33,6 +33,7 @@ section "Install dependencies" & {
   pip install --quiet --no-deps -e .[complete]
   pip install --quiet -r docs/requirements-docs.txt
   pip install --quiet doc2dash
+  pip install --quiet docutils==0.12 # Temporary downgrade to resolve build error
 }
 
 section "Build documentation" & {
