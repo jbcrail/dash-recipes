@@ -4,7 +4,7 @@ SRC=https://github.com/dask/dask
 NAME=`basename ${SRC}`
 ENV=${NAME}-`cat /dev/urandom | base64 | head -c 4`
 DOCSET=Dask
-VERSION=0.14.3
+VERSION=0.18.2
 
 REPO_DIR=`pwd`/repos/${NAME}
 DOCSET_DIR=`pwd`/docsets/${NAME}
@@ -25,15 +25,18 @@ section "Clone repository" & {
 }
 
 section "Create conda environment" & {
-  conda create --yes --quiet -n ${ENV} python
+  conda create --yes --quiet -n ${ENV} python=3
   source activate ${ENV}
 }
 
 section "Install dependencies" & {
+  conda install -y -q lxml=3.8.0  # required by doc2dash 2.2.0
+  conda install -y -q scipy
+
+  pip install --upgrade pip
   pip install --quiet --no-deps -e .[complete]
   pip install --quiet -r docs/requirements-docs.txt
   pip install --quiet doc2dash
-  pip install --quiet docutils==0.12 # Temporary downgrade to resolve build error
 }
 
 section "Build documentation" & {
@@ -42,6 +45,7 @@ section "Build documentation" & {
 }
 
 section "Build docset" & {
+  rm -rf ${DOCSET_DIR}
   mkdir -p ${DOCSET_DIR}
   doc2dash --quiet -n ${DOCSET} --enable-js -d ${DOCSET_DIR} -I index.html build/html
 }
