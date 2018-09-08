@@ -4,7 +4,7 @@ SRC=https://github.com/dask/distributed
 NAME=$(basename ${SRC})
 ENV=${NAME}-$(cat < /dev/urandom | base64 | head -c 4)
 DOCSET=Distributed
-VERSION=1.22.1
+VERSION=1.23.1
 
 REPO_DIR=$(pwd)/repos/${NAME}
 DOCSET_DIR=$(pwd)/docsets/${NAME}
